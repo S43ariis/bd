@@ -1,0 +1,1912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dalam World — Knowledge Base</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="shortcut icon" href="https://ru.dalam.world/favicon-dw.ico.57224f73f7d958bcfcedbcb16bdd7c65.ico">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+/* ===================== CSS-переменные ===================== */
+:root {
+    --bg: #0a0a0f;
+    --bg-card: rgba(12, 12, 20, 0.88);
+    --bg-card-hover: rgba(18, 18, 30, 0.95);
+    --fg: #e0d8c8;
+    --fg-muted: #7a7468;
+    --accent: #c9a84c;
+    --accent-dim: #8b7535;
+    --accent-glow: rgba(201, 168, 76, 0.25);
+    --border: rgba(201, 168, 76, 0.12);
+    --border-hover: rgba(201, 168, 76, 0.35);
+    --radius: 8px;
+    --radius-lg: 14px;
+    --shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+    --grade-none: #888888;
+    --grade-d: #698fef;
+    --grade-c: #16d420;
+    --grade-b: #4bb5f0;
+    --grade-a: #f05a5a;
+    --grade-s: #d24dfa;
+    --font-display: 'Cinzel', serif;
+    --font-ui: 'Rajdhani', sans-serif;
+}
+
+/* ===================== Сброс и база ===================== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: var(--font-ui);
+    background: var(--bg);
+    color: var(--fg);
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.5;
+}
+
+/* Фоновое изображение */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: url('https://ru.dalam.world/dwback.jpeg') center/cover no-repeat;
+    z-index: -2;
+}
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 30%, rgba(10,10,15,0.4) 0%, rgba(10,10,15,0.92) 70%);
+    z-index: -1;
+}
+
+/* Скроллбар */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); }
+::-webkit-scrollbar-thumb { background: var(--accent-dim); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* Канвас частиц */
+#particles { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
+
+/* ===================== Навигация ===================== */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(8, 8, 14, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+}
+nav {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+.logo {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 22px;
+    color: var(--accent);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    text-shadow: 0 0 20px var(--accent-glow);
+}
+.nav-links { display: flex; gap: 8px; }
+.nav-links a {
+    font-family: var(--font-ui);
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--fg-muted);
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: var(--radius);
+    transition: all 0.25s ease;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+.nav-links a:hover {
+    color: var(--accent);
+    background: rgba(201, 168, 76, 0.08);
+}
+.lang-switcher {
+    display: flex;
+    gap: 2px;
+    background: rgba(255,255,255,0.04);
+    border-radius: var(--radius);
+    padding: 2px;
+    border: 1px solid var(--border);
+}
+.lang-switcher button {
+    font-family: var(--font-ui);
+    font-weight: 600;
+    font-size: 12px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--fg-muted);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    letter-spacing: 0.5px;
+}
+.lang-switcher button.active { background: var(--accent); color: #0a0a0f; }
+.lang-switcher button:hover:not(.active) { color: var(--fg); }
+
+/* ===================== Герой-секция ===================== */
+.hero {
+    text-align: center;
+    padding: 48px 24px 40px;
+    position: relative;
+}
+.hero h1 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(30px, 5vw, 52px);
+    color: var(--accent);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    text-shadow: 0 0 40px var(--accent-glow);
+}
+.hero .subtitle {
+    font-size: 16px;
+    color: var(--fg-muted);
+    font-weight: 400;
+    margin-bottom: 32px;
+    letter-spacing: 1px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Карточки фич */
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    max-width: 900px;
+    margin: 0 auto 36px;
+}
+.feature-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 24px 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+.feature-card:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+.feature-card i {
+    font-size: 28px;
+    color: var(--accent);
+    margin-bottom: 12px;
+    display: block;
+}
+.feature-card h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--fg);
+    margin-bottom: 6px;
+    letter-spacing: 1px;
+}
+.feature-card p {
+    font-size: 13px;
+    color: var(--fg-muted);
+    line-height: 1.5;
+}
+
+/* CTA кнопка */
+.hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 36px;
+    border: 2px solid var(--accent);
+    border-radius: 50px;
+    background: transparent;
+    color: var(--accent);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    margin-bottom: 32px;
+    cursor: pointer;
+}
+.hero-cta:hover {
+    background: var(--accent);
+    color: #0a0a0f;
+    box-shadow: 0 0 30px var(--accent-glow);
+}
+
+/* Поиск */
+.search-container {
+    max-width: 560px;
+    margin: 0 auto 28px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.search-container input {
+    width: 100%;
+    padding: 14px 52px 14px 20px;
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    background: var(--bg-card);
+    color: var(--fg);
+    font-family: var(--font-ui);
+    font-size: 15px;
+    font-weight: 500;
+    outline: none;
+    transition: all 0.3s ease;
+}
+.search-container input::placeholder { color: var(--fg-muted); }
+.search-container input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 20px var(--accent-glow);
+}
+.search-container button {
+    position: absolute;
+    right: 6px;
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #0a0a0f;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.search-container button:hover { background: #dbb85c; transform: scale(1.05); }
+
+/* Статистика */
+.stats-bar { display: flex; justify-content: center; gap: 28px; flex-wrap: wrap; }
+.stat-item { text-align: center; }
+.stat-item .stat-num {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 26px;
+    color: var(--accent);
+    line-height: 1.2;
+}
+.stat-item .stat-label {
+    font-size: 11px;
+    color: var(--fg-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ===================== Контент ===================== */
+.content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px 60px;
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+}
+
+/* Боковая панель фильтров */
+.filters {
+    width: 220px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 84px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.filter-group {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 16px;
+}
+.filter-group h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+}
+
+/* Табы грейдов */
+.grade-tabs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+.grade-tabs button {
+    font-family: var(--font-ui);
+    font-weight: 700;
+    font-size: 13px;
+    padding: 7px 0;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    background: rgba(255,255,255,0.03);
+    color: var(--fg-muted);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.grade-tabs button:hover { background: rgba(255,255,255,0.07); color: var(--fg); }
+.grade-tabs button.active { background: rgba(201,168,76,0.12); color: var(--accent); border-color: var(--accent); }
+.grade-tabs button[data-grade="d"].active { color: var(--grade-d); border-color: var(--grade-d); background: rgba(105,143,239,0.1); }
+.grade-tabs button[data-grade="c"].active { color: var(--grade-c); border-color: var(--grade-c); background: rgba(22,212,32,0.1); }
+.grade-tabs button[data-grade="b"].active { color: var(--grade-b); border-color: var(--grade-b); background: rgba(75,181,240,0.1); }
+.grade-tabs button[data-grade="a"].active { color: var(--grade-a); border-color: var(--grade-a); background: rgba(240,90,90,0.1); }
+.grade-tabs button[data-grade="s"].active { color: var(--grade-s); border-color: var(--grade-s); background: rgba(210,77,250,0.1); }
+
+/* Список категорий */
+.category-list { display: flex; flex-direction: column; gap: 3px; }
+.category-list button {
+    font-family: var(--font-ui);
+    font-weight: 500;
+    font-size: 14px;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--fg-muted);
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s ease;
+}
+.category-list button:hover { background: rgba(255,255,255,0.05); color: var(--fg); }
+.category-list button.active { background: rgba(201,168,76,0.1); color: var(--accent); font-weight: 600; }
+
+/* Сортировка */
+.sort-row { display: flex; gap: 6px; align-items: center; }
+.sort-row select {
+    flex: 1;
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: rgba(255,255,255,0.04);
+    color: var(--fg);
+    font-family: var(--font-ui);
+    font-size: 13px;
+    font-weight: 500;
+    outline: none;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+}
+.sort-row select option { background: #1a1a28; color: var(--fg); }
+.sort-row button {
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: rgba(255,255,255,0.04);
+    color: var(--fg-muted);
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.sort-row button:hover { color: var(--accent); border-color: var(--accent); }
+
+/* Основной контент */
+.main-content { flex: 1; min-width: 0; }
+.items-info { font-size: 13px; color: var(--fg-muted); margin-bottom: 16px; padding-left: 4px; }
+.items-info span { color: var(--accent); font-weight: 600; }
+
+/* ===================== Сетка предметов ===================== */
+.items-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 14px;
+}
+
+/* Карточка предмета */
+.item-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    animation: cardIn 0.4s ease both;
+}
+.item-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--card-grade-color, var(--accent));
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+}
+.item-card:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--border-hover);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow), 0 0 20px rgba(201,168,76,0.08);
+}
+.item-card:hover::before { opacity: 1; }
+
+@keyframes cardIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.item-card-img {
+    width: 32px;
+    height: 32px;
+    margin: 0 auto 12px;
+    display: block;
+    object-fit: contain;
+    image-rendering: pixelated;
+    transition: transform 0.3s ease;
+}
+.item-card:hover .item-card-img { transform: scale(1.1); }
+
+.item-card-name {
+    font-family: var(--font-ui);
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--fg);
+    text-align: center;
+    line-height: 1.3;
+    margin-bottom: 6px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 34px;
+}
+.item-card-stat {
+    font-size: 12px;
+    color: var(--fg-muted);
+    text-align: center;
+    margin-bottom: 2px;
+}
+.item-card-stat b { color: var(--fg); font-weight: 600; }
+.item-card-price { font-size: 11px; color: var(--accent-dim); text-align: center; }
+
+/* Бейдж кристаллизации на карточке */
+.item-card-crystal {
+    position: absolute;
+    bottom: 6px;
+    left: 8px;
+    font-size: 10px;
+    color: var(--grade-s);
+    opacity: 0.7;
+}
+.item-card-crystal i { margin-right: 2px; }
+
+/* Бейдж грейда */
+.grade-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 22px;
+    height: 22px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid;
+}
+.grade-badge.none { color: var(--grade-none); border-color: var(--grade-none); background: rgba(136,136,136,0.1); }
+.grade-badge.d { color: var(--grade-d); border-color: var(--grade-d); background: rgba(105,143,239,0.1); }
+.grade-badge.c { color: var(--grade-c); border-color: var(--grade-c); background: rgba(22,212,32,0.1); }
+.grade-badge.b { color: var(--grade-b); border-color: var(--grade-b); background: rgba(75,181,240,0.1); }
+.grade-badge.a { color: var(--grade-a); border-color: var(--grade-a); background: rgba(240,90,90,0.1); }
+.grade-badge.s { color: var(--grade-s); border-color: var(--grade-s); background: rgba(210,77,250,0.1); }
+.grade-badge img { width: 18px; height: 18px; }
+
+/* ===================== Загрузка / пусто / пагинация ===================== */
+.loading { display: none; text-align: center; padding: 60px 0; color: var(--fg-muted); }
+.loading.active { display: block; }
+.spinner {
+    width: 40px; height: 40px;
+    border: 3px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    margin: 0 auto 12px;
+    animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.empty-state { text-align: center; padding: 80px 20px; color: var(--fg-muted); }
+.empty-state i { font-size: 48px; margin-bottom: 16px; opacity: 0.3; display: block; }
+.empty-state p { font-size: 16px; }
+
+.pagination { display: flex; justify-content: center; gap: 6px; margin-top: 32px; flex-wrap: wrap; }
+.pagination button {
+    font-family: var(--font-ui);
+    font-weight: 600;
+    font-size: 13px;
+    min-width: 38px;
+    height: 38px;
+    padding: 0 10px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--bg-card);
+    color: var(--fg-muted);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.pagination button:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+.pagination button.active { background: var(--accent); color: #0a0a0f; border-color: var(--accent); }
+.pagination button:disabled { opacity: 0.3; cursor: not-allowed; }
+
+/* ===================== Модальное окно ===================== */
+.modal-overlay {
+    position: fixed; inset: 0; z-index: 1000;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.modal-overlay.active { display: flex; opacity: 1; }
+
+.modal {
+    background: linear-gradient(165deg, rgba(18,18,30,0.97) 0%, rgba(10,10,18,0.98) 100%);
+    border: 1px solid var(--border-hover);
+    border-radius: var(--radius-lg);
+    width: 100%;
+    max-width: 520px;
+    max-height: 85vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.6), 0 0 40px var(--accent-glow);
+    animation: modalIn 0.3s ease;
+}
+@keyframes modalIn {
+    from { transform: scale(0.92) translateY(20px); opacity: 0; }
+    to   { transform: scale(1) translateY(0); opacity: 1; }
+}
+.modal-close {
+    position: absolute; top: 12px; right: 12px;
+    width: 34px; height: 34px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    background: rgba(0,0,0,0.4);
+    color: var(--fg-muted);
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+.modal-close:hover { color: var(--accent); border-color: var(--accent); }
+
+.modal-header {
+    padding: 28px 24px 16px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+}
+.modal-item-img {
+    width: 96px; height: 96px;
+    object-fit: contain;
+    margin: 0 auto 12px;
+    display: block;
+    image-rendering: pixelated;
+    image-rendering: `crisp-edges`;
+}
+.modal-item-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--fg);
+    margin-bottom: 4px;
+}
+.modal-item-grade {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.modal-body { padding: 20px 24px 28px; }
+
+.stat-table { width: 100%; border-collapse: collapse; }
+.stat-table tr { border-bottom: 1px solid rgba(255,255,255,0.04); }
+.stat-table tr:last-child { border-bottom: none; }
+.stat-table td { padding: 8px 0; font-size: 14px; }
+.stat-table td:first-child { color: var(--fg-muted); font-weight: 500; width: 45%; }
+.stat-table td:last-child { color: var(--fg); font-weight: 600; text-align: right; }
+.stat-val-good { color: #4ade80 !important; }
+.stat-val-bad  { color: #f87171 !important; }
+
+/* Блок кристаллизации в модалке */
+.crystal-info {
+    background: rgba(210, 77, 250, 0.08);
+    border: 1px solid rgba(210, 77, 250, 0.2);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.crystal-info i { font-size: 20px; color: var(--grade-s); }
+.crystal-info .crystal-text { font-size: 14px; color: var(--fg); }
+.crystal-info .crystal-text b { color: var(--grade-s); font-weight: 700; }
+
+.modal-flags { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
+.modal-flag {
+    font-size: 11px; font-weight: 600; padding: 4px 10px;
+    border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px;
+}
+.modal-flag.yes { background: rgba(74,222,128,0.1); color: #4ade80; border: 1px solid rgba(74,222,128,0.2); }
+.modal-flag.no  { background: rgba(248,113,113,0.1); color: #f87171; border: 1px solid rgba(248,113,113,0.2); }
+
+.modal-share { margin-top: 16px; display: flex; gap: 8px; align-items: center; }
+.modal-share-label { font-size: 12px; color: var(--fg-muted); white-space: nowrap; }
+.modal-share-input {
+    flex: 1; padding: 6px 10px;
+    border: 1px solid var(--border); border-radius: 6px;
+    background: rgba(255,255,255,0.04); color: var(--fg);
+    font-family: var(--font-ui); font-size: 12px; outline: none;
+}
+.modal-share-btn {
+    padding: 6px 14px;
+    border: 1px solid var(--border); border-radius: 6px;
+    background: var(--accent); color: #0a0a0f;
+    font-family: var(--font-ui); font-weight: 600; font-size: 12px;
+    cursor: pointer; transition: all 0.2s ease; white-space: nowrap;
+}
+.modal-share-btn:hover { background: #dbb85c; }
+
+/* Тост "Скопировано" */
+.copied-toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+    background: var(--accent); color: #0a0a0f;
+    padding: 10px 24px; border-radius: 8px;
+    font-weight: 600; font-size: 14px; z-index: 2000;
+    opacity: 0; transition: opacity 0.3s; pointer-events: none;
+}
+.copied-toast.show { opacity: 1; }
+
+/* ===================== Футер ===================== */
+footer {
+    text-align: center; padding: 32px 24px;
+    border-top: 1px solid var(--border); color: var(--fg-muted); font-size: 13px;
+}
+footer a { color: var(--accent-dim); text-decoration: none; }
+footer a:hover { color: var(--accent); }
+
+/* ===================== Адаптив ===================== */
+@media (max-width: 900px) {
+    .content { flex-direction: column; }
+    .filters {
+        width: 100%; position: static;
+        flex-direction: row; flex-wrap: wrap; gap: 12px;
+    }
+    .filter-group { flex: 1; min-width: 200px; }
+    .items-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+}
+@media (max-width: 600px) {
+    nav { padding: 0 12px; height: 52px; }
+    .logo { font-size: 16px; letter-spacing: 1px; }
+    .nav-links a { padding: 6px 10px; font-size: 11px; }
+    .lang-switcher button { padding: 4px 7px; font-size: 11px; }
+    .hero { padding: 36px 16px 28px; }
+    .hero h1 { letter-spacing: 2px; }
+    .content { padding: 0 12px 40px; }
+    .items-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+    .item-card { padding: 10px; }
+    .filters { flex-direction: column; }
+    .filter-group { min-width: 100%; }
+    .features { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+</style>
+</head>
+<body>
+
+<!-- Канвас для частиц -->
+<canvas id="particles" aria-hidden="true"></canvas>
+
+<!-- Навигация -->
+<header>
+<nav>
+    <div class="logo">Dalam World</div>
+    <div class="nav-links">
+        <a href="https://route.dalam.world/">
+            <i class="fas fa-home" style="margin-right:4px"></i>
+            <span data-i18n="nav_home">Home</span>
+        </a>
+        <a href="https://dalam.world/forums/">
+            <i class="fas fa-comments" style="margin-right:4px"></i>
+            <span data-i18n="nav_forum">Forum</span>
+        </a>
+        <a href="https://ru.dalam.world/dw/dwnld">
+            <i class="fas fa-download" style="margin-right:4px"></i>
+            <span data-i18n="nav_play">Play</span>
+        </a>
+    </div>
+    <div class="lang-switcher" role="group" aria-label="Language">
+        <button data-lang="en" class="active">EN</button>
+        <button data-lang="ru">RU</button>
+        <button data-lang="pl">PL</button>
+    </div>
+</nav>
+</header>
+
+<main>
+<!-- Герой-секция -->
+<section class="hero">
+    <h1 data-i18n="title">Knowledge Base</h1>
+    <p class="subtitle" data-i18n="subtitle">Complete catalog of Dalam World — find any item, view detailed stats, crystalization info, and share links with other players</p>
+
+    <div class="features">
+        <div class="feature-card">
+            <i class="fas fa-database"></i>
+            <h3 data-i18n="feat_db_title">Items Database</h3>
+            <p data-i18n="feat_db_desc">Browse thousands of items — weapons, armor, jewelry, and misc. with full stat breakdowns and filtering by grade and type</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-gem"></i>
+            <h3 data-i18n="feat_cry_title">Crystalization</h3>
+            <p data-i18n="feat_cry_desc">See which items can be broken down into crystals, how many you get, and what grade they produce</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-share-nodes"></i>
+            <h3 data-i18n="feat_share_title">Share &amp; Link</h3>
+            <p data-i18n="feat_share_desc">Every item has a direct link — copy it and share with friends, guildmates, or post on the forum</p>
+        </div>
+    </div>
+
+    <a class="hero-cta" target="_blank" href="https://ru.dalam.world/dw/dwnld">
+        <i class="fas fa-download"></i>
+        <span data-i18n="cta_download">Download &amp; Play</span>
+    </a>
+
+    <div class="search-container">
+        <input type="text" id="searchInput"
+               data-i18n-placeholder="search_placeholder"
+               placeholder="Search items by name..."
+               aria-label="Search items">
+        <button id="searchBtn" aria-label="Search"><i class="fas fa-search"></i></button>
+    </div>
+
+    <div class="stats-bar" id="statsBar"></div>
+</section>
+
+<!-- Фильтры + результаты -->
+<section class="content">
+    <aside class="filters" aria-label="Filters">
+        <!-- Грейд -->
+        <div class="filter-group">
+            <h3 data-i18n="filter_grade">Grade</h3>
+            <div class="grade-tabs" id="gradeTabs">
+                <button data-grade="all" class="active" data-i18n="all">All</button>
+                <button data-grade="none">-</button>
+                <button data-grade="d">D</button>
+                <button data-grade="c">C</button>
+                <button data-grade="b">B</button>
+                <button data-grade="a">A</button>
+                <button data-grade="s">S</button>
+            </div>
+        </div>
+        <!-- Категория -->
+        <div class="filter-group">
+            <h3 data-i18n="filter_category">Category</h3>
+            <div class="category-list" id="categoryList">
+                <button data-type="all" class="active" data-i18n="all">All</button>
+                <button data-type="weapon" data-i18n="cat_weapons">Weapons</button>
+                <button data-type="armor" data-i18n="cat_armor">Armor</button>
+                <button data-type="heavy" data-i18n="cat_heavy">Heavy Armor</button>
+                <button data-type="light" data-i18n="cat_light">Light Armor</button>
+                <button data-type="magic" data-i18n="cat_magic">Magic Armor</button>
+                <button data-type="jewelry" data-i18n="cat_jewelry">Jewelry</button>
+                <button data-type="helmet" data-i18n="cat_helmets">Helmets</button>
+                <button data-type="boots" data-i18n="cat_boots">Boots</button>
+                <button data-type="gloves" data-i18n="cat_gloves">Gloves</button>
+                <!--button data-type="etcitem" data-i18n="cat_misc">Miscellaneous</button-->
+            </div>
+        </div>
+        <!-- Сортировка -->
+        <div class="filter-group">
+            <h3 data-i18n="filter_sort">Sort by</h3>
+            <div class="sort-row">
+                <select id="sortSelect">
+                    <option value="name" data-i18n="sort_name">Name</option>
+                    <option value="grade" data-i18n="sort_grade">Grade</option>
+                    <option value="price" data-i18n="sort_price">Price</option>
+                    <option value="stat" data-i18n="sort_stat">Main Stat</option>
+                </select>
+                <button id="sortOrderBtn" aria-label="Toggle sort order">
+                    <i class="fas fa-sort-amount-up"></i>
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <div class="main-content">
+        <div class="items-info" id="itemsInfo"></div>
+        <div class="items-grid" id="itemsGrid"></div>
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <span data-i18n="loading">Loading...</span>
+        </div>
+        <div class="empty-state" id="emptyState" style="display:none">
+            <i class="fas fa-box-open"></i>
+            <p data-i18n="no_items">No items found</p>
+        </div>
+        <div class="pagination" id="pagination"></div>
+    </div>
+</section>
+</main>
+
+<!-- Модальное окно предмета -->
+<div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-label="Item details">
+    <div class="modal" id="itemModal">
+        <button class="modal-close" id="modalClose" aria-label="Close">
+            <i class="fas fa-times"></i>
+        </button>
+        <div id="modalContent"></div>
+    </div>
+</div>
+
+<!-- Тост "Скопировано" -->
+<div class="copied-toast" id="copiedToast"></div>
+
+<footer>
+    <p>&copy; 2024 <a href="https://dalam.world">Dalam.World</a>. All rights reserved.</p>
+</footer>
+
+<script>
+/* ================================================================
+   Dalam World — Knowledge Base: фронтенд
+   Полностью переформатированная версия
+   ================================================================ */
+
+// ===================== Система переводов (i18n) =====================
+var TRANSLATIONS = {
+    en: {
+        nav_home: 'Home',
+        nav_forum: 'Forum',
+        nav_play: 'Play',
+        title: 'Knowledge Base',
+        subtitle: 'Complete catalog of Dalam World — find any item, view detailed stats, crystalization info, and share links with other players',
+        search_placeholder: 'Search items by name...',
+        filter_grade: 'Grade',
+        filter_category: 'Category',
+        filter_sort: 'Sort by',
+        all: 'All',
+        cat_weapons: 'Weapons',
+        cat_armor: 'Armor',
+        cat_heavy: 'Heavy Armor',
+        cat_light: 'Light Armor',
+        cat_magic: 'Magic Armor',
+        cat_jewelry: 'Jewelry',
+        cat_helmets: 'Helmets',
+        cat_boots: 'Boots',
+        cat_gloves: 'Gloves',
+        cat_misc: 'Miscellaneous',
+        sort_name: 'Name',
+        sort_grade: 'Grade',
+        sort_price: 'Price',
+        sort_stat: 'Main Stat',
+        loading: 'Loading...',
+        no_items: 'No items found',
+        showing: 'Showing',
+        of: 'of',
+        items: 'items',
+        total_items: 'Total Items',
+        p_def: 'P.Def',
+        m_def: 'M.Def',
+        p_atk: 'P.Atk',
+        m_atk: 'M.Atk',
+        mp_bonus: 'MP Bonus',
+        price: 'Price',
+        weight: 'Weight',
+        material: 'Material',
+        crystal_count: 'Crystal Count',
+        crystal_type: 'Grade',
+        bodypart: 'Slot',
+        armor_type: 'Type',
+        weapon_type: 'Type',
+        atk_speed: 'Atk Speed',
+        critical: 'Critical',
+        sellable: 'Sellable',
+        dropable: 'Dropable',
+        destroyable: 'Destroyable',
+        tradeable: 'Tradeable',
+        yes: 'Yes',
+        no: 'No',
+        grade_none: 'No Grade',
+        grade_d: 'D Grade',
+        grade_c: 'C Grade',
+        grade_b: 'B Grade',
+        grade_a: 'A Grade',
+        grade_s: 'S Grade',
+        heavy: 'Heavy',
+        light: 'Light',
+        magic: 'Magic',
+        none: 'None',
+        adena: 'Adena',
+        share: 'Share',
+        copied: 'Copied!',
+        crystallizes: 'Crystallizes into',
+        crystals: 'crystals',
+        feat_db_title: 'Items Database',
+        feat_db_desc: 'Browse thousands of items — weapons, armor, jewelry, and misc. with full stat breakdowns and filtering by grade and type',
+        feat_cry_title: 'Crystalization',
+        feat_cry_desc: 'See which items can be broken down into crystals, how many you get, and what grade they produce',
+        feat_share_title: 'Share & Link',
+        feat_share_desc: 'Every item has a direct link — copy it and share with friends, guildmates, or post on the forum',
+        cta_download: 'Download & Play'
+    },
+    ru: {
+        nav_home: 'Главная',
+        nav_forum: 'Форум',
+        nav_play: 'Играть',
+        title: 'База Знаний',
+        subtitle: 'Полный каталог мира Dalam — находите любые предметы, просматривайте характеристики, информацию о кристаллизации и делитесь ссылками',
+        search_placeholder: 'Поиск предметов по названию...',
+        filter_grade: 'Грейд',
+        filter_category: 'Категория',
+        filter_sort: 'Сортировка',
+        all: 'Все',
+        cat_weapons: 'Оружие',
+        cat_armor: 'Броня',
+        cat_heavy: 'Тяжёлая броня',
+        cat_light: 'Лёгкая броня',
+        cat_magic: 'Магическая броня',
+        cat_jewelry: 'Ювелирные изделия',
+        cat_helmets: 'Шлемы',
+        cat_boots: 'Сапоги',
+        cat_gloves: 'Перчатки',
+        cat_misc: 'Разное',
+        sort_name: 'Название',
+        sort_grade: 'Грейд',
+        sort_price: 'Цена',
+        sort_stat: 'Осн. характ.',
+        loading: 'Загрузка...',
+        no_items: 'Предметы не найдены',
+        showing: 'Показано',
+        of: 'из',
+        items: 'предметов',
+        total_items: 'Всего предметов',
+        p_def: 'Физ. защита',
+        m_def: 'Маг. защита',
+        p_atk: 'Физ. атака',
+        m_atk: 'Маг. атака',
+        mp_bonus: 'Бонус МП',
+        price: 'Цена',
+        weight: 'Вес',
+        material: 'Материал',
+        crystal_count: 'Кристаллов',
+        crystal_type: 'Грейд',
+        bodypart: 'Слот',
+        armor_type: 'Тип',
+        weapon_type: 'Тип',
+        atk_speed: 'Скор. атаки',
+        critical: 'Крит. шанс',
+        sellable: 'Продается',
+        dropable: 'Выпадает',
+        destroyable: 'Уничтожается',
+        tradeable: 'Передается',
+        yes: 'Да',
+        no: 'Нет',
+        grade_none: 'Без грейда',
+        grade_d: 'D Грейд',
+        grade_c: 'C Грейд',
+        grade_b: 'B Грейд',
+        grade_a: 'A Грейд',
+        grade_s: 'S Грейд',
+        heavy: 'Тяжёлая',
+        light: 'Лёгкая',
+        magic: 'Магическая',
+        none: 'Нет',
+        adena: 'Адена',
+        share: 'Поделиться',
+        copied: 'Скопировано!',
+        crystallizes: 'Разбивается на',
+        crystals: 'кристаллов',
+        feat_db_title: 'База предметов',
+        feat_db_desc: 'Просматривайте тысячи предметов — оружие, броню, украшения и прочее с полными характеристиками и фильтрацией по грейду и типу',
+        feat_cry_title: 'Кристаллизация',
+        feat_cry_desc: 'Узнайте, какие предметы можно разбить на кристаллы, сколько получится и какого грейда',
+        feat_share_title: 'Ссылки и шеринг',
+        feat_share_desc: 'У каждого предмета есть прямая ссылка — копируйте и делитесь с друзьями, соклановцами или на форуме',
+        cta_download: 'Скачать и играть'
+    },
+    pl: {
+        nav_home: 'Strona glowna',
+        nav_forum: 'Forum',
+        nav_play: 'Graj',
+        title: 'Baza Wiedzy',
+        subtitle: 'Pelny katalog swiata Dalam — znajdz dowolny przedmiot, sprawdz statystyki, informacje o krysztalach i udostepniaj linki',
+        search_placeholder: 'Szukaj przedmiotow po nazwie...',
+        filter_grade: 'Klasa',
+        filter_category: 'Kategoria',
+        filter_sort: 'Sortowanie',
+        all: 'Wszystkie',
+        cat_weapons: 'Bronie',
+        cat_armor: 'Zbroje',
+        cat_heavy: 'Ciezka zbroja',
+        cat_light: 'Lekka zbroja',
+        cat_magic: 'Magiczna zbroja',
+        cat_jewelry: 'Biuteria',
+        cat_helmets: 'Helm',
+        cat_boots: 'Buty',
+        cat_gloves: 'Rekawice',
+        cat_misc: 'Rozne',
+        sort_name: 'Nazwa',
+        sort_grade: 'Klasa',
+        sort_price: 'Cena',
+        sort_stat: 'Glowna stat.',
+        loading: 'Ladowanie...',
+        no_items: 'Nie znaleziono przedmiotow',
+        showing: 'Pokazano',
+        of: 'z',
+        items: 'przedmiotow',
+        total_items: 'Lacznie przedmiotow',
+        p_def: 'Obrona fiz.',
+        m_def: 'Obrona mag.',
+        p_atk: 'Atak fiz.',
+        m_atk: 'Atak mag.',
+        mp_bonus: 'Bonus MP',
+        price: 'Cena',
+        weight: 'Waga',
+        material: 'Material',
+        crystal_count: 'Krysztaly',
+        crystal_type: 'Klasa',
+        bodypart: 'Slot',
+        armor_type: 'Typ',
+        weapon_type: 'Typ',
+        atk_speed: 'Szybkosc ataku',
+        critical: 'Szans kryt.',
+        sellable: 'Mozna sprzedac',
+        dropable: 'Wypada',
+        destroyable: 'Mozna zniszczyc',
+        tradeable: 'Mozna przekazac',
+        yes: 'Tak',
+        no: 'Nie',
+        grade_none: 'Bez klasy',
+        grade_d: 'Klasa D',
+        grade_c: 'Klasa C',
+        grade_b: 'Klasa B',
+        grade_a: 'Klasa A',
+        grade_s: 'Klasa S',
+        heavy: 'Ciezka',
+        light: 'Lekka',
+        magic: 'Magiczna',
+        none: 'Brak',
+        adena: 'Adena',
+        share: 'Udostepnij',
+        copied: 'Skopiowano!',
+        crystallizes: 'Rozpada sie na',
+        crystals: 'krysztalow',
+        feat_db_title: 'Baza przedmiotow',
+        feat_db_desc: 'Przegladaj tysiace przedmiotow — broni, zbroje, biuterii i inne z pelnymi statystykami i filtrowaniem po klasie i typie',
+        feat_cry_title: 'Krysztaly',
+        feat_cry_desc: 'Sprawdz, ktore przedmioty mozna rozlozyc na krysztaly, ile otrzymasz i jakiej klasy',
+        feat_share_title: 'Linki i udostepnianie',
+        feat_share_desc: 'Kazdy przedmiot ma bezposredni link — kopiuj i dziel sie z przyjaciolmi, sojusznikami lub na forum',
+        cta_download: 'Pobierz i graj'
+    }
+};
+
+var currentLang = 'en';
+
+// Получить перевод по ключу
+function t(key) {
+    if (TRANSLATIONS[currentLang] && TRANSLATIONS[currentLang][key]) {
+        return TRANSLATIONS[currentLang][key];
+    }
+    return TRANSLATIONS['en'][key] || key;
+}
+
+// Применить все переводы к DOM
+function applyTranslations() {
+    var elements = document.querySelectorAll('[data-i18n]');
+    for (var i = 0; i < elements.length; i++) {
+        elements[i].textContent = t(elements[i].getAttribute('data-i18n'));
+    }
+    var placeholders = document.querySelectorAll('[data-i18n-placeholder]');
+    for (var j = 0; j < placeholders.length; j++) {
+        placeholders[j].setAttribute('placeholder', t(placeholders[j].getAttribute('data-i18n-placeholder')));
+    }
+    document.documentElement.lang = currentLang;
+}
+
+// Привязка переключателей языка
+var langButtons = document.querySelectorAll('.lang-switcher button');
+for (var li = 0; li < langButtons.length; li++) {
+    langButtons[li].addEventListener('click', function () {
+        for (var k = 0; k < langButtons.length; k++) {
+            langButtons[k].classList.remove('active');
+        }
+        this.classList.add('active');
+        currentLang = this.getAttribute('data-lang');
+        applyTranslations();
+        loadStats();
+        loadItems();
+        pushStateFilters();
+    });
+}
+
+// ===================== Состояние приложения =====================
+var state = {
+    type: 'all',
+    grade: 'all',
+    search: '',
+    sort: 'name',
+    order: 'asc',
+    page: 1
+};
+
+// SVG-плейсхолдер для предмета без картинки
+var PLACEHOLDER_IMG = 'data:image/svg+xml,' + encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64">' +
+    '<rect width="64" height="64" rx="8" fill="#1a1a28"/>' +
+    '<text x="32" y="40" text-anchor="middle" fill="#333" font-size="28" font-family="sans-serif">?</text></svg>'
+);
+
+// ===================== Утилиты =====================
+
+// Форматирование цены
+function formatPrice(price) {
+    if (price <= 0) return '-';
+    if (price >= 100000000) return (price / 1000000).toFixed(0) + 'M';
+    if (price >= 1000000) return (price / 1000000).toFixed(1) + 'M';
+    if (price >= 10000) return (price / 1000).toFixed(1) + 'K';
+    if (price >= 1000) return (price / 1000).toFixed(1) + 'K';
+    return price.toString();
+}
+
+// Цвет грейда
+function gradeColor(grade) {
+    var colors = {
+        none: '#888888', d: '#698fef', c: '#16d420',
+        b: '#4bb5f0', a: '#f05a5a', s: '#d24dfa'
+    };
+    return colors[grade] || colors['none'];
+}
+
+// Название грейда с переводом
+function gradeName(grade) {
+    if (!grade || grade === 'none' || grade === '') return t('grade_none');
+    return t('grade_' + grade);
+}
+
+// Fallback для картинки — пробуем 2 варианта, потом плейсхолдер
+function imageFallback(img) {
+    if (!img.dataset.tryCount) img.dataset.tryCount = '0';
+    var tryNum = parseInt(img.dataset.tryCount);
+    var currentUrl = img.src;
+
+    tryNum++;
+    // Пытка 1: _i00.jpg → .jpg
+    if (tryNum === 1 && currentUrl.indexOf('_i00.jpg') !== -1) {
+        img.src = currentUrl.replace('_i00.jpg', '.jpg');
+        img.dataset.tryCount = '1';
+    }
+    // Пытка 2: _i00.jpg → _i00_2.jpg
+    else if (tryNum === 2 && currentUrl.indexOf('_i00.jpg') !== -1) {
+        img.src = currentUrl.replace('_i00.jpg', '_i00_2.jpg');
+        img.dataset.tryCount = '2';
+    }
+    // Все варианты исчерпаны — плейсхолдер
+    else {
+        img.src = PLACEHOLDER_IMG;
+        img.onerror = null;
+    }
+}
+
+// Основная характеристика для карточки
+function getMainStat(item) {
+    var isWeapon = (item.item_table === 'weapon' || item.item_table === 'custom_weapon');
+    if (isWeapon) {
+        return { label: t('p_atk'), value: item.stat1 };
+    }
+    var jewelryParts = ['rear,lear', 'rfinger,lfinger', 'neck'];
+    if (jewelryParts.indexOf(item.bodypart) !== -1) {
+        return { label: t('m_def'), value: item.stat2 };
+    }
+    if (item.stat1 > 0) {
+        return { label: t('p_def'), value: item.stat1 };
+    }
+    return null;
+}
+
+// Перевод слота тела
+function translateBodypart(bp) {
+    if (!bp) return t('none');
+    var map = {
+        'chest': 'Chest', 'legs': 'Legs', 'fullarmor': 'Full Armor',
+        'head': 'Head', 'feet': 'Feet', 'gloves': 'Gloves', 'hair': 'Hair',
+        'rear,lear': 'Earring', 'rfinger,lfinger': 'Ring', 'neck': 'Necklace',
+        'underwear': 'Underwear', 'rhand': 'Right Hand', 'lhand': 'Left Hand',
+        'lrhand': 'Both Hands', 'none': 'None'
+    };
+    return map[bp] || bp;
+}
+
+// Перевод материала
+function translateMaterial(mat) {
+    if (!mat) return t('none');
+    return mat.charAt(0).toUpperCase() + mat.slice(1).replace(/_/g, ' ');
+}
+
+// ===================== API =====================
+var API_BASE = 'https://api-basedata-asm-replicate.dalam.world/dw.asm';
+
+function apiGet(params, callback) {
+    var queryParts = [];
+    for (var key in params) {
+        if (params.hasOwnProperty(key)) {
+            queryParts.push(encodeURIComponent(key) + '=' + encodeURIComponent(params[key]));
+        }
+    }
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', API_BASE + '?' + queryParts.join('&'), true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                try {
+                    callback(null, JSON.parse(xhr.responseText));
+                } catch (e) {
+                    callback('Parse error', null);
+                }
+            } else {
+                callback('HTTP ' + xhr.status, null);
+            }
+        }
+    };
+    xhr.send();
+}
+
+// ===================== Статистика =====================
+function loadStats() {
+    apiGet({ action: 'stats' }, function (err, data) {
+        if (err || !data || data.error) return;
+
+        var bar = document.getElementById('statsBar');
+        var html = '<div class="stat-item">' +
+            '<div class="stat-num">' + data.total + '</div>' +
+            '<div class="stat-label">' + t('total_items') + '</div></div>';
+
+        var gradeKeys = ['s', 'a', 'b', 'c', 'd', 'none'];
+        for (var i = 0; i < gradeKeys.length; i++) {
+            if (data.byGrade[gradeKeys[i]] > 0) {
+                var label = gradeKeys[i] === 'none' ? '-' : gradeKeys[i].toUpperCase();
+                html += '<div class="stat-item">' +
+                    '<div class="stat-num" style="color:' + gradeColor(gradeKeys[i]) + '">' +
+                    data.byGrade[gradeKeys[i]] + '</div>' +
+                    '<div class="stat-label">' + label + '</div></div>';
+            }
+        }
+        bar.innerHTML = html;
+    });
+}
+
+// ===================== Загрузка предметов =====================
+var isLoading = false;
+
+function loadItems() {
+    if (isLoading) return;
+    isLoading = true;
+
+    var grid = document.getElementById('itemsGrid');
+    var loadingEl = document.getElementById('loading');
+    var emptyEl = document.getElementById('emptyState');
+    var infoEl = document.getElementById('itemsInfo');
+    var pagEl = document.getElementById('pagination');
+
+    grid.innerHTML = '';
+    emptyEl.style.display = 'none';
+    pagEl.innerHTML = '';
+    infoEl.innerHTML = '';
+    loadingEl.classList.add('active');
+
+    var params = {
+        action: 'items',
+        type: state.type,
+        grade: state.grade,
+        sort: state.sort,
+        order: state.order,
+        page: state.page
+    };
+    if (state.search) {
+        params.search = state.search;
+    }
+
+    apiGet(params, function (err, data) {
+        loadingEl.classList.remove('active');
+        isLoading = false;
+
+        if (err || !data || data.error) {
+            emptyEl.style.display = 'block';
+            return;
+        }
+        if (data.items.length === 0) {
+            emptyEl.style.display = 'block';
+            return;
+        }
+
+        // Информация о результатах
+        var from = (data.page - 1) * data.limit + 1;
+        var to = from + data.items.length - 1;
+        infoEl.innerHTML = t('showing') + ' <span>' + from + '–' + to + '</span> '
+            + t('of') + ' <span>' + data.total + '</span> ' + t('items');
+
+        // Рендер карточек
+        var html = '';
+        for (var i = 0; i < data.items.length; i++) {
+            var item = data.items[i];
+            var gc = item.crystal_type || 'none';
+            var ms = getMainStat(item);
+
+            // Статистика на карточке
+            var statHtml = '';
+            if (ms && ms.value > 0) {
+                statHtml += '<div class="item-card-stat"><b>' + ms.value + '</b> ' + ms.label + '</div>';
+            }
+            // Для магической брони дополнительно показываем M.Def
+            if ((item.item_table === 'armor' || item.item_table === 'custom_armor')
+                && item.sub_type === 'magic' && item.stat2 > 0) {
+                statHtml += '<div class="item-card-stat"><b>' + item.stat2 + '</b> ' + t('m_def') + '</div>';
+            }
+
+            // Цена
+            var priceHtml = item.price > 0
+                ? '<div class="item-card-price">' + formatPrice(item.price) + ' ' + t('adena') + '</div>'
+                : '';
+
+            // Бейдж грейда (GIF-иконка)
+            var badgeHtml = '';
+            if (gc && gc !== 'none' && gc !== '') {
+                badgeHtml = '<div class="grade-badge ' + gc + '">' +
+                    '<img src="https://cp.dalam.world/images/grade/' + gc.toUpperCase() + '.gif" alt="' + gc.toUpperCase() + '">' +
+                    '</div>';
+            }
+
+            // Бейдж кристаллизации на карточке
+            var crystalHtml = '';
+            if (item.crystallizable === 'true' && item.crystal_count > 0) {
+                crystalHtml = '<div class="item-card-crystal"><i class="fas fa-gem"></i>' + item.crystal_count + '</div>';
+            }
+
+            // Картинка (из API или плейсхолдер)
+            var imgHtml;
+            if (item.img_url) {
+                var safeName = item.name.replace(/"/g, '&quot;');
+                imgHtml = '<img class="item-card-img" src="' + item.img_url + '" alt="' + safeName + '" '
+                    + 'onerror="imageFallback(this)">';
+            } else {
+                imgHtml = '<img class="item-card-img" src="' + PLACEHOLDER_IMG + '" alt="">';
+            }
+
+            html += '<div class="item-card" data-id="' + item.item_id + '" '
+                + 'style="--card-grade-color:' + gradeColor(gc) + '; animation-delay:' + (i * 0.03) + 's">'
+                + badgeHtml
+                + imgHtml
+                + '<div class="item-card-name">' + item.name + '</div>'
+                + statHtml
+                + priceHtml
+                + crystalHtml
+                + '</div>';
+        }
+        grid.innerHTML = html;
+
+        // Привязка кликов к карточкам
+        var cards = grid.querySelectorAll('.item-card');
+        for (var c = 0; c < cards.length; c++) {
+            cards[c].addEventListener('click', function () {
+                openItemModal(parseInt(this.getAttribute('data-id')));
+            });
+        }
+
+        // Пагинация
+        renderPagination(data.page, data.pages);
+    });
+}
+
+// ===================== Пагинация =====================
+function renderPagination(currentPage, totalPages) {
+    var pagEl = document.getElementById('pagination');
+    if (totalPages <= 1) {
+        pagEl.innerHTML = '';
+        return;
+    }
+
+    var html = '';
+
+    // Кнопка «назад»
+    html += '<button ' + (currentPage <= 1 ? 'disabled' : '') + ' data-page="' + (currentPage - 1) + '">'
+        + '<i class="fas fa-chevron-left"></i></button>';
+
+    // Диапазон страниц
+    var start = Math.max(1, currentPage - 3);
+    var end = Math.min(totalPages, currentPage + 3);
+    if (start > 1) {
+        html += '<button data-page="1">1</button>';
+        if (start > 2) html += '<button disabled>...</button>';
+    }
+    for (var p = start; p <= end; p++) {
+        html += '<button data-page="' + p + '" class="' + (p === currentPage ? 'active' : '') + '">' + p + '</button>';
+    }
+    if (end < totalPages) {
+        if (end < totalPages - 1) html += '<button disabled>...</button>';
+        html += '<button data-page="' + totalPages + '">' + totalPages + '</button>';
+    }
+
+    // Кнопка «вперёд»
+    html += '<button ' + (currentPage >= totalPages ? 'disabled' : '') + ' data-page="' + (currentPage + 1) + '">'
+        + '<i class="fas fa-chevron-right"></i></button>';
+
+    pagEl.innerHTML = html;
+
+    // Привязка кликов
+    var pageButtons = pagEl.querySelectorAll('button[data-page]');
+    for (var b = 0; b < pageButtons.length; b++) {
+        pageButtons[b].addEventListener('click', function () {
+            if (this.disabled) return;
+            state.page = parseInt(this.getAttribute('data-page'));
+            loadItems();
+            pushStateFilters();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+}
+
+// ===================== Модальное окно =====================
+function openItemModal(itemId, skipPush) {
+    var overlay = document.getElementById('modalOverlay');
+    var content = document.getElementById('modalContent');
+
+    // Показать загрузку
+    content.innerHTML = '<div style="padding:60px;text-align:center">'
+        + '<div class="spinner" style="margin:0 auto 12px"></div>'
+        + '<span style="color:var(--fg-muted)">' + t('loading') + '</span></div>';
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+
+    if (!skipPush) pushStateWithItem(itemId);
+
+    apiGet({ action: 'item', id: itemId }, function (err, data) {
+        if (err || !data || data.error) {
+            content.innerHTML = '<div style="padding:60px;text-align:center;color:var(--fg-muted)">'
+                + '<i class="fas fa-exclamation-triangle" style="font-size:36px;margin-bottom:12px;display:block;opacity:0.4"></i>'
+                + (data && data.error ? data.error : 'Error') + '</div>';
+            return;
+        }
+        renderModalContent(data);
+    });
+}
+
+function renderModalContent(item) {
+    var content = document.getElementById('modalContent');
+    var gc = item.crystal_type || 'none';
+    var shareUrl = window.location.origin + window.location.pathname + '?id=' + item.item_id;
+    var isWeapon = (item.item_table === 'weapon' || item.item_table === 'custom_weapon');
+
+    // Картинка
+    var imgHtml;
+    if (item.img_url) {
+        var safeName = item.name.replace(/"/g, '&quot;');
+        imgHtml = '<img class="modal-item-img" src="' + item.img_url + '" alt="' + safeName + '" '
+            + 'onerror="imageFallback(this)">';
+    } else {
+        imgHtml = '<img class="modal-item-img" src="' + PLACEHOLDER_IMG + '" alt="">';
+    }
+
+    // Заголовок модалки
+    var html = '<div class="modal-header">'
+        + imgHtml
+        + '<div class="modal-item-name">' + item.name + '</div>'
+        + '<div class="modal-item-grade" style="color:' + gradeColor(gc) + '">' + gradeName(gc) + '</div>'
+        + '</div>';
+
+    // Таблица характеристик
+    html += '<div class="modal-body"><table class="stat-table">';
+
+    if (isWeapon) {
+        if (item.p_atk > 0) html += '<tr><td>' + t('p_atk') + '</td><td class="stat-val-good">' + item.p_atk + '</td></tr>';
+        if (item.m_atk > 0) html += '<tr><td>' + t('m_atk') + '</td><td>' + item.m_atk + '</td></tr>';
+        if (item.critical > 0) html += '<tr><td>' + t('critical') + '</td><td>' + item.critical + '</td></tr>';
+        if (item.atk_speed > 0) html += '<tr><td>' + t('atk_speed') + '</td><td>' + item.atk_speed + '</td></tr>';
+        if (item.soulshot_count > 0) html += '<tr><td>Soulshot</td><td>' + item.soulshot_count + '</td></tr>';
+        if (item.spiritshot_count > 0) html += '<tr><td>Spiritshot</td><td>' + item.spiritshot_count + '</td></tr>';
+        if (item.mp_consume > 0) html += '<tr><td>MP Consume</td><td class="stat-val-bad">' + item.mp_consume + '</td></tr>';
+        if (item.weapon_type) html += '<tr><td>' + t('weapon_type') + '</td><td>' + translateMaterial(item.weapon_type) + '</td></tr>';
+    } else {
+        if (item.p_def > 0) html += '<tr><td>' + t('p_def') + '</td><td class="stat-val-good">' + item.p_def + '</td></tr>';
+        if (item.m_def > 0) html += '<tr><td>' + t('m_def') + '</td><td>' + item.m_def + '</td></tr>';
+        if (item.mp_bonus > 0) html += '<tr><td>' + t('mp_bonus') + '</td><td class="stat-val-good">+' + item.mp_bonus + '</td></tr>';
+        if (item.avoid_modify > 0) html += '<tr><td>Evasion</td><td>+' + item.avoid_modify + '</td></tr>';
+        if (item.armor_type) html += '<tr><td>' + t('armor_type') + '</td><td>' + t(item.armor_type) + '</td></tr>';
+    }
+
+    // Общие поля
+    if (item.bodypart) html += '<tr><td>' + t('bodypart') + '</td><td>' + translateBodypart(item.bodypart) + '</td></tr>';
+    if (item.weight > 0) html += '<tr><td>' + t('weight') + '</td><td>' + item.weight + '</td></tr>';
+    if (item.material) html += '<tr><td>' + t('material') + '</td><td>' + translateMaterial(item.material) + '</td></tr>';
+    if (item.crystal_count > 0) html += '<tr><td>' + t('crystal_count') + '</td><td>' + item.crystal_count + '</td></tr>';
+    if (item.price > 0) html += '<tr><td>' + t('price') + '</td><td style="color:var(--accent)">' + item.price.toLocaleString() + ' ' + t('adena') + '</td></tr>';
+    if (item.item_skill_id > 0) html += '<tr><td>Skill</td><td>ID: ' + item.item_skill_id + ' (Lv.' + item.item_skill_lvl + ')</td></tr>';
+
+    html += '</table>';
+
+    // Блок кристаллизации
+    if (item.crystallizable === 'true' && item.crystal_count > 0) {
+        var gradeLabel = (gc && gc !== 'none') ? t('grade_' + gc) : t('grade_none');
+        html += '<div class="crystal-info">'
+            + '<i class="fas fa-gem"></i>'
+            + '<div class="crystal-text">'
+            + t('crystallizes') + ' <b>' + item.crystal_count + '</b> ' + gradeLabel + ' ' + t('crystals')
+            + '</div></div>';
+    }
+
+    // Флаги (продажа, дроп, уничтожение, обмен)
+    html += '<div class="modal-flags">';
+    html += makeFlag('sellable', item.sellable);
+    html += makeFlag('dropable', item.dropable);
+    html += makeFlag('destroyable', item.destroyable);
+    html += makeFlag('tradeable', item.tradeable);
+    html += '</div>';
+
+    // Блок «Поделиться»
+    html += '<div class="modal-share">'
+        + '<span class="modal-share-label"><i class="fas fa-link" style="margin-right:4px"></i>' + t('share') + ':</span>'
+        + '<input class="modal-share-input" type="text" value="' + shareUrl + '" readonly id="shareInput" onclick="this.select()">'
+        + '<button class="modal-share-btn" id="copyShareBtn"><i class="fas fa-copy"></i></button>'
+        + '</div>';
+
+    html += '</div>';
+    content.innerHTML = html;
+
+    // Кнопка «Копировать ссылку»
+    document.getElementById('copyShareBtn').addEventListener('click', function () {
+        var input = document.getElementById('shareInput');
+        input.select();
+        try { document.execCommand('copy'); } catch (e) { /* ignore */ }
+        showCopiedToast();
+    });
+}
+
+// Создать HTML флага
+function makeFlag(key, value) {
+    var isYes = (value === 'true' || value === true);
+    return '<span class="modal-flag ' + (isYes ? 'yes' : 'no') + '">'
+        + t(key) + ': ' + (isYes ? t('yes') : t('no'))
+        + '</span>';
+}
+
+// Показать тост «Скопировано»
+function showCopiedToast() {
+    var toast = document.getElementById('copiedToast');
+    toast.textContent = t('copied');
+    toast.classList.add('show');
+    setTimeout(function () {
+        toast.classList.remove('show');
+    }, 1500);
+}
+
+// Закрыть модалку
+function closeModal() {
+    document.getElementById('modalOverlay').classList.remove('active');
+    document.body.style.overflow = '';
+    pushStateFilters();
+}
+
+document.getElementById('modalClose').addEventListener('click', closeModal);
+document.getElementById('modalOverlay').addEventListener('click', function (e) {
+    if (e.target === this) closeModal();
+});
+document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeModal();
+});
+
+// ===================== GET-параметры и история =====================
+
+// Парсинг GET-параметров
+function parseGetParams() {
+    var params = {};
+    var search = window.location.search.substring(1);
+    if (!search) return params;
+    var pairs = search.split('&');
+    for (var i = 0; i < pairs.length; i++) {
+        var kv = pairs[i].split('=');
+        params[decodeURIComponent(kv[0])] = decodeURIComponent(kv[1] || '');
+    }
+    return params;
+}
+
+// Обновить URL без id (фильтры)
+function pushStateFilters() {
+    var url = window.location.pathname;
+    var parts = [];
+    if (state.type !== 'all')   parts.push('type=' + encodeURIComponent(state.type));
+    if (state.grade !== 'all')  parts.push('grade=' + encodeURIComponent(state.grade));
+    if (state.search)           parts.push('search=' + encodeURIComponent(state.search));
+    if (sort !== 'name')       parts.push('sort=' + encodeURIComponent(state.sort));
+    if (state.order !== 'asc')   parts.push('order=' + encodeURIComponent(state.order));
+    if (state.page > 1)          parts.push('page=' + state.page);
+    if (currentLang !== 'en')   parts.push('lang=' + currentLang);
+    if (parts.length) url += '?' + parts.join('&');
+    window.history.replaceState({}, '', url);
+}
+
+// Обновить URL с id предмета
+function pushStateWithItem(id) {
+    var url = window.location.pathname + '?id=' + id;
+    var parts = [];
+    if (state.type !== 'all')   parts.push('type=' + encodeURIComponent(state.type));
+    if (state.grade !== 'all')  parts.push('grade=' + encodeURIComponent(state.grade));
+    if (state.search)           parts.push('search=' + encodeURIComponent(state.search));
+    if (state.sort !== 'name')   parts.push('sort=' + encodeURIComponent(state.sort));
+    if (state.order !== 'asc')   parts.push('order=' + encodeURIComponent(state.order));
+    if (state.page > 1)          parts.push('page=' + state.page);
+    if (currentLang !== 'en')   parts.push('lang=' + currentLang);
+    if (parts.length) url += '&' + parts.join('&');
+    window.history.pushState({ itemId: id }, '', url);
+}
+
+// Обработка кнопок «Назад» / «Вперёд»
+window.addEventListener('popstate', function (e) {
+    if (e.state && e.state.itemId) {
+        openItemModal(e.state.itemId, true);
+    } else {
+        var gp = parseGetParams();
+        if (gp.id) {
+            openItemModal(parseInt(gp.id), true);
+        } else {
+            closeModal();
+        }
+    }
+});
+
+// ===================== Привязка фильтров =====================
+
+// Установить активную кнопку в группе
+function setActiveButton(groupSelector, attr, value) {
+    var buttons = document.querySelectorAll(groupSelector + ' button');
+    for (var k = 0; k < buttons.length; k++) {
+        buttons[k].classList.toggle('active', buttons[k].getAttribute(attr) === value);
+    }
+}
+
+// Грейды
+var gradeButtons = document.querySelectorAll('#gradeTabs button');
+for (var gi = 0; gi < gradeButtons.length; gi++) {
+    gradeButtons[gi].addEventListener('click', function () {
+        setActiveButton('#gradeTabs', 'data-grade', this.getAttribute('data-grade'));
+        state.grade = this.getAttribute('data-grade');
+        state.page = 1;
+        loadItems();
+        pushStateFilters();
+    });
+}
+
+// Категории
+var categoryButtons = document.querySelectorAll('#categoryList button');
+for (var ci = 0; ci < categoryButtons.length; ci++) {
+    categoryButtons[ci].addEventListener('click', function () {
+        setActiveButton('#categoryList', 'data-type', this.getAttribute('data-type'));
+        state.type = this.getAttribute('data-type');
+        state.page = 1;
+        loadItems();
+        pushStateFilters();
+    });
+}
+
+// Сортировка: выбор поля
+document.getElementById('sortSelect').addEventListener('change', function () {
+    state.sort = this.value;
+    state.page = 1;
+    loadItems();
+    pushStateFilters();
+});
+
+// Сортировка: переключение asc/desc
+document.getElementById('sortOrderBtn').addEventListener('click', function () {
+    state.order = (state.order === 'asc') ? 'desc' : 'asc';
+    this.querySelector('i').className = (state.order === 'asc')
+        ? 'fas fa-sort-amount-up'
+        : 'fas fa-sort-amount-down';
+    state.page = 1;
+    loadItems();
+    pushStateFilters();
+});
+
+// Поиск с debounce
+var searchTimeout = null;
+
+document.getElementById('searchInput').addEventListener('input', function () {
+    clearTimeout(searchTimeout);
+    var value = this.value;
+    searchTimeout = setTimeout(function () {
+        state.search = value.trim();
+        state.page = 1;
+        loadItems();
+        pushStateFilters();
+    }, 350);
+});
+
+document.getElementById('searchBtn').addEventListener('click', function () {
+    clearTimeout(searchTimeout);
+    state.search = document.getElementById('searchInput').value.trim();
+    state.page = 1;
+    loadItems();
+    pushStateFilters();
+});
+
+document.getElementById('searchInput').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') {
+        clearTimeout(searchTimeout);
+        state.search = this.value.trim();
+        state.page = 1;
+        loadItems();
+        pushStateFilters();
+    }
+});
+
+// ===================== Частицы на канвасе =====================
+(function () {
+    var canvas = document.getElementById('particles');
+    var ctx = canvas.getContext('2d');
+    var particles = [];
+    var PARTICLE_COUNT = 50;
+    var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    // Создание частиц
+    for (var i = 0; i < PARTICLE_COUNT; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            vx: (Math.random() - 0.5) * 0.3,
+            vy: -Math.random() * 0.4 - 0.1,
+            size: Math.random() * 2 + 0.5,
+            alpha: Math.random() * 0.4 + 0.1,
+            phase: Math.random() * Math.PI * 2
+        });
+    }
+
+    function animate() {
+        if (prefersReducedMotion) return;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        for (var i = 0; i < particles.length; i++) {
+            var p = particles[i];
+            p.x += p.vx;
+            p.y += p.vy;
+            p.phase += 0.015;
+
+            // Оборачивание по краям
+            if (p.y < -10) {
+                p.y = canvas.height + 10;
+                p.x = Math.random() * canvas.width;
+            }
+            if (p.x < -10) p.x = canvas.width + 10;
+            if (p.x > canvas.width + 10) p.x = -10;
+
+            var alpha = p.alpha * (0.6 + 0.4 * Math.sin(p.phase));
+
+            // Основная точка
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, Math.max(0.1, p.size), 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(201, 168, 76, ' + alpha.toFixed(3) + ')';
+            ctx.fill();
+
+            // Свечение для крупных частиц
+            if (p.size > 1) {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, Math.max(0.1, p.size * 3), 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(201, 168, 76, ' + (alpha * 0.15).toFixed(3) + ')';
+                ctx.fill();
+            }
+        }
+        requestAnimationFrame(animate);
+    }
+    animate();
+})();
+
+// ===================== Инициализация =====================
+(function () {
+    // Парсим GET-параметры и применяем к состоянию и UI
+    var gp = parseGetParams();
+
+    // Язык
+    if (gp.lang && TRANSLATIONS[gp.lang]) {
+        currentLang = gp.lang;
+        for (var k = 0; k < langButtons.length; k++) {
+            langButtons[k].classList.toggle('active',
+                langButtons[k].getAttribute('data-lang') === currentLang);
+        }
+    }
+    applyTranslations();
+
+    // Фильтры
+    var allowedTypes = ['all', 'weapon', 'armor', 'heavy', 'light', 'magic', 'jewelry', 'helmet', 'boots', 'gloves', 'etcitem'];
+    if (gp.type && allowedTypes.indexOf(gp.type) !== -1) {
+        state.type = gp.type;
+        setActiveButton('#categoryList', 'data-type', gp.type);
+    }
+
+    var allowedGrades = ['all', 'none', 'd', 'c', 'b', 'a', 's'];
+    if (gp.grade && allowedGrades.indexOf(gp.grade) !== -1) {
+        state.grade = gp.grade;
+        setActiveButton('#gradeTabs', 'data-grade', gp.grade);
+    }
+
+    var allowedSorts = ['name', 'grade', 'price', 'stat'];
+    if (gp.sort && allowedSorts.indexOf(gp.sort) !== -1) {
+        state.sort = gp.sort;
+        document.getElementById('sortSelect').value = gp.sort;
+    }
+
+    if (gp.order && (gp.order === 'asc' || gp.order === 'desc')) {
+        state.order = gp.order;
+        document.getElementById('sortOrderBtn').querySelector('i').className =
+            (state.order === 'asc') ? 'fas fa-sort-amount-up' : 'fas fa-sort-amount-down';
+    }
+
+    if (gp.search) {
+        state.search = gp.search;
+        document.getElementById('searchInput').value = gp.search;
+    }
+
+    if (gp.page && parseInt(gp.page) > 0) {
+        state.page = parseInt(gp.page);
+    }
+
+    // Загружаем данные
+    loadStats();
+    loadItems();
+
+    // Если есть ?id=XXX — открываем модалку с задержкой
+    if (gp.id) {
+        var itemId = parseInt(gp.id);
+        setTimeout(function () {
+            openItemModal(itemId, true);
+        }, 300);
+    }
+})();
+</script>
+</body>
+</html>
